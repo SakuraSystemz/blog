@@ -1,14 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-06T08:57:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">SakuraSystemz Blog</title><author><name>The/Rai01e</name><email>cicadahaskell@gmail.com</email></author><entry><title type="html">ブログを開設しました</title><link href="http://localhost:4000/1st-post/" rel="alternate" type="text/html" title="ブログを開設しました" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/1st-post</id><content type="html" xml:base="http://localhost:4000/1st-post/"><![CDATA[<p>このブログでは日々の事や何か学んだことを書いていきます。<br />
-主に自分の興味分野や日々の記録やご報告等に終始すると思います。<br /></p>]]></content><author><name>The/Rai01e</name><email>cicadahaskell@gmail.com</email></author><summary type="html"><![CDATA[このブログでは日々の事や何か学んだことを書いていきます。 主に自分の興味分野や日々の記録やご報告等に終始すると思います。]]></summary></entry><entry><title type="html">jekyllとGitHub pagesでブログを組む時にハマった事</title><link href="http://localhost:4000/jeykll-ghp/" rel="alternate" type="text/html" title="jekyllとGitHub pagesでブログを組む時にハマった事" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/jeykll-ghp</id><content type="html" xml:base="http://localhost:4000/jeykll-ghp/"><![CDATA[<h2 id="はじめに">はじめに</h2>
-<p>自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかったのとトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイントをここに書いておきます。<br /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-12-15T16:37:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">SakuraSystemz Blog</title><author><name>The/Rai01e</name></author><entry><title type="html">ブログを開設しました</title><link href="http://localhost:4000/1st-post/" rel="alternate" type="text/html" title="ブログを開設しました" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/1st-post</id><content type="html" xml:base="http://localhost:4000/1st-post/"><![CDATA[<p>このブログでは日々の事や何か学んだことを書いていきます。<br />
+主に自分の興味分野や日々の記録やご報告等に終始すると思います。<br /></p>]]></content><author><name>The/Rai01e</name></author><summary type="html"><![CDATA[このブログでは日々の事や何か学んだことを書いていきます。 主に自分の興味分野や日々の記録やご報告等に終始すると思います。]]></summary></entry><entry><title type="html">JekyllとGitHub pagesでブログを組む時にハマった事</title><link href="http://localhost:4000/jeykll-ghp/" rel="alternate" type="text/html" title="JekyllとGitHub pagesでブログを組む時にハマった事" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/jeykll-ghp</id><content type="html" xml:base="http://localhost:4000/jeykll-ghp/"><![CDATA[<h2 id="はじめに">はじめに</h2>
+<p>自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。<br /></p>
 
 <p>申し遅れました、実際の生活と密接な名義として<code class="language-plaintext highlighter-rouge">Rai01e(SakuraSystemz)</code>を名乗らせてもらってます。<br /></p>
 
-<h3 id="ハマった点1-jekyllテーマの依存関係">ハマった点(1) Jekyllテーマの依存関係</h3>
+<p>記事の流れとしてRubyとJekyllのインストールとセットアップ方法は省きます。<br />
+ただテーマ毎に仕様が違うので、それを応用的に運用する為にも公式のドキュメントは読んで損は無いと思います。ベースは同じなので。<br />
+<a href="https://jekyllrb.com/docs/">https://jekyllrb.com/docs/</a></p>
+
+<h2 id="ハマった点1-jekyllテーマの依存関係">ハマった点(1) Jekyllテーマの依存関係</h2>
 
 <p>ローカルでテストする段階の話です。正確に書くと<code class="language-plaintext highlighter-rouge">更新の途絶えたテーマの依存gemが要求するRubyバージョン</code>で躓く事が多かったです。<br />
-自分が見覚えのある<a href="https://jamstackthemes.dev/theme/dark-poole/">dark-poole</a>や<a href="https://jamstackthemes.dev/theme/jekyll-midnight/">Midnight</a>のビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い<code class="language-plaintext highlighter-rouge">minimal_mistakes</code>に決めました。<br /></p>
+自分の場合だと、見覚えのある<a href="https://jamstackthemes.dev/theme/dark-poole/">dark-poole</a>や<a href="https://jamstackthemes.dev/theme/jekyll-midnight/">Midnight</a>のビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い<code class="language-plaintext highlighter-rouge">minimal_mistakes</code>に決めました。<br /></p>
 
 <p>rbenvでバージョン管理を行えば解決しますが、2.x系は怖くて無理でした。<br /></p>
 
-<h3 id="ハマった2-jekyllキャッシュに気をつけよ">ハマった(2) Jekyllキャッシュに気をつけよ</h3>]]></content><author><name>The/Rai01e</name><email>cicadahaskell@gmail.com</email></author><summary type="html"><![CDATA[はじめに 自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかったのとトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイントをここに書いておきます。]]></summary></entry></feed>
+<h2 id="ハマった点2-jekyllキャッシュに気をつけよ">ハマった点(2) Jekyllキャッシュに気をつけよ</h2>
+
+<p>基本的にGitHub pagesのコンテンツは全て全世界公開なので、ブログ用ローカルリポジトリの<code class="language-plaintext highlighter-rouge">.jekyll-cache</code>を削除してからコミットすることを推奨します。このディレクトリには該当リポジトリへのフルパスが含まれているので、端末のユーザー名がGitHubのリポジトリ経由で外部に公開されてしまいます。<a href="https://en.wikipedia.org/wiki/Operations_security">OPSEC</a>の観点から削除しましょう。<br />
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2023-08-06/vo.2/img1.png" alt=".jekyll-cache" />
+<code class="language-plaintext highlighter-rouge">jekyll server --disable-disk-cache</code>また<code class="language-plaintext highlighter-rouge">jekyll build --disable-disk-cache</code>で永続的に無効化できます。<br /></p>
+
+<h2 id="ハマった点3-github-pagesとのタイムゾーンのズレ">ハマった点(3) GitHub pagesとのタイムゾーンのズレ</h2>
+
+<p>このブログを公開する際一番悩まされたのがGitHub pagesで公開した記事が反映されなかった事です。GitHub側のビルドと反映に時間がかかる事は前提知識としてありましたが、あまりにも遅かったのでBuildログを見ると<code class="language-plaintext highlighter-rouge">記事の読み込み自体がスキップされていました</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reading: _posts/2023-08-06-post.md
+Skipping: _posts/2023-08-06-post.md has a future date
+
+</code></pre></div></div>
+<p>とりあえずChatGPTでデバッグした所、GitHub側のビルドシステムのタイムゾーンがUTCであった為、日本時間よりUTCの方が進みが遅く2023年8月6日付けの記事が公開できない事がわかりました。そのタイムゾーンから考えて未来の記事は公開できないということですね。しかし、先程示した記事が8月6日付けなのは変えようがないので、<code class="language-plaintext highlighter-rouge">_config.yml</code>に<code class="language-plaintext highlighter-rouge">future: true</code>を埋め込む事で強引に解決させました。どうもGitHub側のタイムゾーンを<code class="language-plaintext highlighter-rouge">_config.yml</code>側からこれ以外迂回することはできないようです。<br /></p>
+
+<h2 id="終わりに">終わりに</h2>
+<p>親切感のないアバウトな記事ですが、自分が難儀した3つのポイントを掲載しておきました。Rubyを長らく触っていたのでこのブログを作るまでの作業時間はおそらく3時間ぐらいでした。殆どの時間をJekyllとGitHub pagesのビルドシステムの研究に割きました。<br /></p>
+
+<p>ともあれこの記事をご覧になった誰かの役に立てば幸いです。</p>]]></content><author><name>The/Rai01e</name></author><category term="備忘録" /><category term="薄い記事" /><summary type="html"><![CDATA[はじめに 自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。 申し遅れました、実際の生活と密接な名義としてRai01e(SakuraSystemz)を名乗らせてもらってます。 記事の流れとしてRubyとJekyllのインストールとセットアップ方法は省きます。 ただテーマ毎に仕様が違うので、それを応用的に運用する為にも公式のドキュメントは読んで損は無いと思います。ベースは同じなので。 https://jekyllrb.com/docs/ ハマった点(1) Jekyllテーマの依存関係 ローカルでテストする段階の話です。正確に書くと更新の途絶えたテーマの依存gemが要求するRubyバージョンで躓く事が多かったです。 自分の場合だと、見覚えのあるdark-pooleやMidnightのビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高いminimal_mistakesに決めました。 rbenvでバージョン管理を行えば解決しますが、2.x系は怖くて無理でした。 ハマった点(2) Jekyllキャッシュに気をつけよ 基本的にGitHub pagesのコンテンツは全て全世界公開なので、ブログ用ローカルリポジトリの.jekyll-cacheを削除してからコミットすることを推奨します。このディレクトリには該当リポジトリへのフルパスが含まれているので、端末のユーザー名がGitHubのリポジトリ経由で外部に公開されてしまいます。OPSECの観点から削除しましょう。 jekyll server --disable-disk-cacheまたjekyll build --disable-disk-cacheで永続的に無効化できます。 ハマった点(3) GitHub pagesとのタイムゾーンのズレ このブログを公開する際一番悩まされたのがGitHub pagesで公開した記事が反映されなかった事です。GitHub側のビルドと反映に時間がかかる事は前提知識としてありましたが、あまりにも遅かったのでBuildログを見ると記事の読み込み自体がスキップされていました Reading: _posts/2023-08-06-post.md Skipping: _posts/2023-08-06-post.md has a future date とりあえずChatGPTでデバッグした所、GitHub側のビルドシステムのタイムゾーンがUTCであった為、日本時間よりUTCの方が進みが遅く2023年8月6日付けの記事が公開できない事がわかりました。そのタイムゾーンから考えて未来の記事は公開できないということですね。しかし、先程示した記事が8月6日付けなのは変えようがないので、_config.ymlにfuture: trueを埋め込む事で強引に解決させました。どうもGitHub側のタイムゾーンを_config.yml側からこれ以外迂回することはできないようです。 終わりに 親切感のないアバウトな記事ですが、自分が難儀した3つのポイントを掲載しておきました。Rubyを長らく触っていたのでこのブログを作るまでの作業時間はおそらく3時間ぐらいでした。殆どの時間をJekyllとGitHub pagesのビルドシステムの研究に割きました。 ともあれこの記事をご覧になった誰かの役に立てば幸いです。]]></summary></entry></feed>

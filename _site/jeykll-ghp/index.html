@@ -1,438 +1,79 @@
-<!doctype html>
-<!--
-  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
-  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
-  Free for personal and commercial use under the MIT license
-  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
--->
-<html lang="ja" class="no-js">
-  <head>
-    <meta charset="utf-8">
-
-<!-- begin _includes/seo.html --><title>jekyllとGitHub pagesでブログを組む時にハマった事 - SakuraSystemz Blog</title>
-<meta name="description" content="はじめに 自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかったのとトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイントをここに書いておきます。">
-
-
-  <meta name="author" content="The/Rai01e">
-  
-  <meta property="article:author" content="The/Rai01e">
-  
-
-
-<meta property="og:type" content="article">
-<meta property="og:locale" content="ja_JP">
-<meta property="og:site_name" content="SakuraSystemz Blog">
-<meta property="og:title" content="jekyllとGitHub pagesでブログを組む時にハマった事">
-<meta property="og:url" content="http://localhost:4000/jeykll-ghp/">
-
-
-  <meta property="og:description" content="はじめに 自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかったのとトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイントをここに書いておきます。">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2023-08-06T00:00:00+09:00">
-
-
-
-
-
-  
-
-  
-
-
+<!DOCTYPE html>
+<html lang="en">
+<title>JekyllとGitHub pagesでブログを組む時にハマった事 | SakuraSystemz Blog</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="The/Rai01e">
+<meta name="generator" content="Jekyll v4.2.2">
 <link rel="canonical" href="http://localhost:4000/jeykll-ghp/">
 
+<link rel="stylesheet" href="/assets/css/frame.css">
 
+<link rel="alternate" href="/feed.xml" type="application/atom+xml" title="SakuraSystemz Blog">
 
 
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    
-      "@type": "Person",
-      "name": "The/Rai01e",
-      "url": "http://localhost:4000/"
-    
-  }
-</script>
 
 
 
 
 
+<header>
+  <a href="/" class="title">SakuraSystemz Blog</a>
+  <nav><a href="/" >Home</a><a href="/about/" >About</a><a href="/tags/" >Tags Index</a></nav>
 
+</header>
 
-<!-- end _includes/seo.html -->
+<article>
+  <header>
+  <h1><a href="/jeykll-ghp/">JekyllとGitHub pagesでブログを組む時にハマった事</a></h1><time datetime="2023-08-06T00:00:00+09:00">August 06, 2023</time>
+</header>
 
-
-
-  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="SakuraSystemz Blog Feed">
-
-
-<!-- https://t.co/dKP3o1e -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<script>
-  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
-</script>
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
-
-
-
-    <!-- start custom head snippets -->
-
-<!-- insert favicons. use https://realfavicongenerator.net/ -->
-
-<!-- end custom head snippets -->
-
-  </head>
-
-  <body class="layout--posts">
-    <nav class="skip-links">
-  <ul>
-    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
-    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
-    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
-  </ul>
-</nav>
-
-    
-
-<div class="masthead">
-  <div class="masthead__inner-wrap">
-    <div class="masthead__menu">
-      <nav id="site-nav" class="greedy-nav">
-        
-        <a class="site-title" href="/">
-          SakuraSystemz Blog
-          
-        </a>
-        <ul class="visible-links"></ul>
-        
-        <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">メニュー</span>
-          <div class="navicon"></div>
-        </button>
-        <ul class="hidden-links hidden"></ul>
-      </nav>
-    </div>
-  </div>
-</div>
-
-
-    <div class="initial-content">
-      
-
-
-
-<div id="main" role="main">
-  
-  <div class="sidebar sticky">
-  
-
-
-<div itemscope itemtype="https://schema.org/Person" class="h-card">
-
-  
-
-  <div class="author__content">
-    <h3 class="author__name p-name" itemprop="name">
-      <a class="u-url" rel="me" href="http://localhost:4000/" itemprop="url">The/Rai01e</a>
-    </h3>
-    
-      <div class="author__bio p-note" itemprop="description">
-        <p>求職中、高校時代より計算機科学に興味があり、計算モデルとRubyを独学した経験を元にRustで単純なブロック暗号の模型の作成した経験あり。
-主な独学にラムダ関数、Rust、代数学(高校範囲)、情報セキュリティ。京都コンピュータ学院中退。大学に籍を移し目下独学中。昨今の興味範囲はPowerShell。</p>
-
-      </div>
-    
-  </div>
-
-  <div class="author__urls-wrapper">
-    <button class="btn btn--inverse">フォロー</button>
-    <ul class="author__urls social-icons">
-      
-        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
-          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name" class="p-locality">Kyoto, Japan</span>
-        </li>
-      
-
-      
-        
-          
-            <li><a href="https://sakurasystemz.github.io/blog" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="https://avatars.githubusercontent.com/u/79076097?v=4" aria-hidden="true"></i><span class="label">Blog</span></a></li>
-          
-        
-          
-            <li><a href="https://twitter.com/sakura_systemz" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="https://avatars.githubusercontent.com/u/79076097?v=4" aria-hidden="true"></i><span class="label">Twitter</span></a></li>
-          
-        
-          
-            <li><a href="https://github.com/SakuraSystemz" rel="nofollow noopener noreferrer me" itemprop="sameAs"><i class="https://avatars.githubusercontent.com/u/79076097?v=4" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
-          
-        
-      
-
-      
-
-      
-        <li>
-          <a href="mailto:cicadahaskell@gmail.com" rel="me" class="u-email">
-            <meta itemprop="email" content="cicadahaskell@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
-          </a>
-        </li>
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      <!--
-  <li>
-    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
-      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
-    </a>
-  </li>
--->
-    </ul>
-  </div>
-</div>
-
-  
-  </div>
-
-
-
-  <div class="archive">
-    
-      <h1 id="page-title" class="page__title">jekyllとGitHub pagesでブログを組む時にハマった事</h1>
-    
-    <h2 id="はじめに">はじめに</h2>
-<p>自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかったのとトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイントをここに書いておきます。<br /></p>
+  <h2 id="はじめに">はじめに</h2>
+<p>自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。<br /></p>
 
 <p>申し遅れました、実際の生活と密接な名義として<code class="language-plaintext highlighter-rouge">Rai01e(SakuraSystemz)</code>を名乗らせてもらってます。<br /></p>
 
-<h3 id="ハマった点1-jekyllテーマの依存関係">ハマった点(1) Jekyllテーマの依存関係</h3>
+<p>記事の流れとしてRubyとJekyllのインストールとセットアップ方法は省きます。<br />
+ただテーマ毎に仕様が違うので、それを応用的に運用する為にも公式のドキュメントは読んで損は無いと思います。ベースは同じなので。<br />
+<a href="https://jekyllrb.com/docs/">https://jekyllrb.com/docs/</a></p>
+
+<h2 id="ハマった点1-jekyllテーマの依存関係">ハマった点(1) Jekyllテーマの依存関係</h2>
 
 <p>ローカルでテストする段階の話です。正確に書くと<code class="language-plaintext highlighter-rouge">更新の途絶えたテーマの依存gemが要求するRubyバージョン</code>で躓く事が多かったです。<br />
-自分が見覚えのある<a href="https://jamstackthemes.dev/theme/dark-poole/">dark-poole</a>や<a href="https://jamstackthemes.dev/theme/jekyll-midnight/">Midnight</a>のビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い<code class="language-plaintext highlighter-rouge">minimal_mistakes</code>に決めました。<br /></p>
+自分の場合だと、見覚えのある<a href="https://jamstackthemes.dev/theme/dark-poole/">dark-poole</a>や<a href="https://jamstackthemes.dev/theme/jekyll-midnight/">Midnight</a>のビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い<code class="language-plaintext highlighter-rouge">minimal_mistakes</code>に決めました。<br /></p>
 
 <p>rbenvでバージョン管理を行えば解決しますが、2.x系は怖くて無理でした。<br /></p>
 
-<h3 id="ハマった2-jekyllキャッシュに気をつけよ">ハマった(2) Jekyllキャッシュに気をつけよ</h3>
+<h2 id="ハマった点2-jekyllキャッシュに気をつけよ">ハマった点(2) Jekyllキャッシュに気をつけよ</h2>
 
+<p>基本的にGitHub pagesのコンテンツは全て全世界公開なので、ブログ用ローカルリポジトリの<code class="language-plaintext highlighter-rouge">.jekyll-cache</code>を削除してからコミットすることを推奨します。このディレクトリには該当リポジトリへのフルパスが含まれているので、端末のユーザー名がGitHubのリポジトリ経由で外部に公開されてしまいます。<a href="https://en.wikipedia.org/wiki/Operations_security">OPSEC</a>の観点から削除しましょう。<br />
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2023-08-06/vo.2/img1.png" alt=".jekyll-cache" />
+<code class="language-plaintext highlighter-rouge">jekyll server --disable-disk-cache</code>また<code class="language-plaintext highlighter-rouge">jekyll build --disable-disk-cache</code>で永続的に無効化できます。<br /></p>
 
+<h2 id="ハマった点3-github-pagesとのタイムゾーンのズレ">ハマった点(3) GitHub pagesとのタイムゾーンのズレ</h2>
 
-<ul class="taxonomy__index">
+<p>このブログを公開する際一番悩まされたのがGitHub pagesで公開した記事が反映されなかった事です。GitHub側のビルドと反映に時間がかかる事は前提知識としてありましたが、あまりにも遅かったのでBuildログを見ると<code class="language-plaintext highlighter-rouge">記事の読み込み自体がスキップされていました</code></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reading: _posts/2023-08-06-post.md
+Skipping: _posts/2023-08-06-post.md has a future date
+
+</code></pre></div></div>
+<p>とりあえずChatGPTでデバッグした所、GitHub側のビルドシステムのタイムゾーンがUTCであった為、日本時間よりUTCの方が進みが遅く2023年8月6日付けの記事が公開できない事がわかりました。そのタイムゾーンから考えて未来の記事は公開できないということですね。しかし、先程示した記事が8月6日付けなのは変えようがないので、<code class="language-plaintext highlighter-rouge">_config.yml</code>に<code class="language-plaintext highlighter-rouge">future: true</code>を埋め込む事で強引に解決させました。どうもGitHub側のタイムゾーンを<code class="language-plaintext highlighter-rouge">_config.yml</code>側からこれ以外迂回することはできないようです。<br /></p>
+
+<h2 id="終わりに">終わりに</h2>
+<p>親切感のないアバウトな記事ですが、自分が難儀した3つのポイントを掲載しておきました。Rubyを長らく触っていたのでこのブログを作るまでの作業時間はおそらく3時間ぐらいでした。殆どの時間をJekyllとGitHub pagesのビルドシステムの研究に割きました。<br /></p>
+
+<p>ともあれこの記事をご覧になった誰かの役に立てば幸いです。</p>
+
   
-  
-    <li>
-      <a href="#2023">
-        <strong>2023</strong> <span class="taxonomy__count">2</span>
-      </a>
-    </li>
-  
-</ul>
+</article>
 
 
 
+<footer>
+  <div>SakuraSystemz Blog</div>
+  <nav><a href="/RvK74@protonmail.com" ><svg aria-label="Mail" class="icon"><use xlink:href="/assets/fontawesome/icons.svg#envelope"></use></svg></a><a href="https://github.com/SakuraSystemz" ><svg aria-label="Github" class="icon"><use xlink:href="/assets/fontawesome/icons.svg#github"></use></svg></a><a href="/feed.xml" ><svg aria-label="Subscribe" class="icon"><use xlink:href="/assets/fontawesome/icons.svg#rss"></use></svg></a></nav>
 
-  <section id="2023" class="taxonomy__section">
-    <h2 class="archive__subtitle">2023</h2>
-    <div class="entries-list">
-      
-        
-
+</footer>
 
 
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/jeykll-ghp/" rel="permalink">jekyllとGitHub pagesでブログを組む時にハマった事
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">はじめに
-自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかったのとトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイントをここに書いておきます。
-</p>
-  </article>
-</div>
-
-      
-        
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a href="/1st-post/" rel="permalink">ブログを開設しました
-</a>
-      
-    </h2>
-    
-
-  <p class="page__meta">
-    
-
-    
-
-    
-      
-      
-
-      <span class="page__meta-readtime">
-        <i class="far fa-clock" aria-hidden="true"></i>
-        
-          less than 1 minute read
-        
-      </span>
-    
-  </p>
-
-
-    <p class="archive__item-excerpt" itemprop="description">このブログでは日々の事や何か学んだことを書いていきます。
-主に自分の興味分野や日々の記録やご報告等に終始すると思います。
-</p>
-  </article>
-</div>
-
-      
-    </div>
-    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
-  </section>
-
-
-  </div>
-</div>
-    </div>
-
-    
-
-    <div id="footer" class="page__footer">
-      <footer>
-        <!-- start custom footer snippets -->
-
-<!-- end custom footer snippets -->
-        <div class="page__footer-follow">
-  <ul class="social-icons">
-    
-      <li><strong>フォロー</strong></li>
-    
-
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-
-    
-      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
-    
-  </ul>
-</div>
-
-<div class="page__footer-copyright">&copy; 2023 The/Rai01e. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
-
-      </footer>
-    </div>
-
-    
-  <script src="/assets/js/main.min.js"></script>
-
-
-
-
-
-
-
-
-
-
-  </body>
 </html>
