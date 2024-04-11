@@ -5,7 +5,7 @@ date: 2023-08-06 +0900
 tags: [備忘録, 薄い記事]
 ---
 ## はじめに
-自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。<br>
+自分は今まではてなブログを使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。<br>
 
 申し遅れました、実際の生活と密接な名義として`Rai01e(SakuraSystemz)`を名乗らせてもらってます。<br>
 
@@ -16,7 +16,7 @@ tags: [備忘録, 薄い記事]
 ## ハマった点(1) Jekyllテーマの依存関係
 
 ローカルでテストする段階の話です。正確に書くと`更新の途絶えたテーマの依存gemが要求するRubyバージョン`で躓く事が多かったです。<br>
-自分の場合だと、見覚えのある[dark-poole](https://jamstackthemes.dev/theme/dark-poole/)や[Midnight](https://jamstackthemes.dev/theme/jekyll-midnight/)のビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い`minimal_mistakes`に決めました。<br>
+自分の場合だと、見覚えのある[dark-poole](https://jamstackthemes.dev/theme/dark-poole/)や[Midnight](https://jamstackthemes.dev/theme/jekyll-midnight/)のビルド中Ruby 2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い`minimal_mistakes`に決めました。<br>
 
 rbenvでバージョン管理を行えば解決しますが、2.x系は怖くて無理でした。<br>
 
