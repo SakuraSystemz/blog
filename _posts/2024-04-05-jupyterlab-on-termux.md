@@ -27,7 +27,7 @@ pip install jupyterlab -U
 
 **注意:スマホのシステム要件や通信環境によってインストールがタイムアウトする場合があります。タイムアウトを防ぐには以下の変数と共にコマンドを実行してください**
 ```bash
-PIP_DEFAULT_TIMEOUT=10 pip install jupyterlab
+PIP_DEFAULT_TIMEOUT=1000 pip install jupyterlab
 ```
 
 ## 起動
