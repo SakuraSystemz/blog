@@ -4,53 +4,53 @@ title: "壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)
 date: 2024-07-04 18:39 +0900
 tags: [Linux, 修理, ext4, fs]
 ---
-カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。</br>
-再度カーネルをアップデートしたはいいものの、次はファイルシステムが壊れていた。</br>
-`FILESYSTEM CHECK FAILD`と出ていたので大方ファイルシステムであろうと思ったが的中していたようだ。</br>
+カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。
+再度カーネルをアップデートしたはいいものの、次はファイルシステムが壊れていた。
+`FILESYSTEM CHECK FAILD`と出ていたので大方ファイルシステムであろうと思ったが的中していたようだ。
 
-今回は手元にあったKaliLinux LiveUSBで修復したが、fsckさえ使えれば特別Kaliでなくても修復できる。</br>
-同様にシステムを起動できない方の助けになれば幸い。</br>
+今回は手元にあったKaliLinux LiveUSで修復したが、fsckさえ使えれば特別Kaliでなくても修復できる。
+同様にシステムを起動できない方の助けになれば幸い。
 
 # 修復作業
-まず手元に起動可能なLiveUSBかLiveDVDを用意する。試していないがUbuntuでもFedoraでもfsckが用意されていると思う。入っていない場合リポジトリを検索して欲しい(aptやdnfで)。</br>
-次にLive起動してターミナルかシリアルコンソールを開いてrootにログインする。これには作業をより簡便に行う意図がある。</br>
-`lsblk -f`を呼び出し起動できなくなったシステムのルートディレクトリが入っているパーティションを見つける。パーティション構成はそのコンピュータ毎に異なる為割愛する。</br>
-```bash
-┌──(root㉿kali)-[/]
-└─# lsblk -f
+まず手元に起動可能なLiveUSかLiveDVDを用意する。試していないがUbuntuでもFedoraでもfsckが用意されていると思う。入っていない場合リポジトリを検索して欲しい(aptやdnfで)。
+次にLive起動してターミナルかシリアルコンソールを開いてootにログインする。これには作業をより簡便に行う意図がある。
+`lslk -f`を呼び出し起動できなくなったシステムのルートディレクトリが入っているパーティションを見つける。パーティション構成はそのコンピュータ毎に異なる為割愛する。
+```ash
+┌──(oot㉿kali)-[/]
+└─# lslk -f
 ```
-先にファイルシステムがマウントされていないか確認する。マウントされている場合はアンマウント。</br>
-ルートパーティションを以下のようにfsckに渡して修復する。私のファイルシステムはext4なので以下のように指定。</br>
-```bash
-┌──(root㉿kali)-[/]
-└─# fsck.ext4 -fyv /dev/sdX #Xは任意の数字、これも使用環境に依存する
+先にファイルシステムがマウントされていないか確認する。マウントされている場合はアンマウント。
+ルートパーティションを以下のようにfsckに渡して修復する。私のファイルシステムはext4なので以下のように指定。
+```ash
+┌──(oot㉿kali)-[/]
+└─# fsck.ext4 -fyv dev/sdX #Xは任意の数字、これも使用環境に依存する
 ```
-`-f`や`-v`はe2fsckに用意されている。fsckはext4を検出するか指定すると自動的にe2fsckに切り替えてくる。</br>
+`-f`や`-v`はe2fsckに用意されている。fsckはext4を検出するか指定すると自動的にe2fsckに切り替えてくる。
 
-修復が完了した事を確認し再起動、電源が落ちたらUSBやDVDを外しておく。</br>
+修復が完了した事を確認し再起動、電源が落ちたらUSやDVDを外しておく。
 
 # 番外編 カーネルアップデートを再開する
-カーネルの修復方法も記載しておく(Arch系限定)</br>
-`chroot`を使いKaliから修復する。</br>
-```bash
-## EFIパーティションをmanjaroのルートパーティションの/bootにマウント
+カーネルの修復方法も記載しておく(Ach系限定)
+`choot`を使いKaliから修復する。
+```ash
+## EFIパーティションをmanjaoのルートパーティションの/bootにマウント
 
-mount /dev/sda1 /path/to/my/manjaro/boot/efi
+mount dev/sda1 /path/to/my/manjaro/boot/efi
 
-cd /path/to/my/manjaro_root_dir/
+cd path/to/my/manjaro_root_dir/
 
 ## ファイルシステムAPIをロード
 
-mount -t proc /proc proc/
-mount -t sysfs /sys sys/
-mount --rbind /dev dev/
+mount -t poc /proc proc/
+mount -t sysfs sys sys/
+mount --bind /dev dev/
 
-## ルートディレクトリからchrootを実行
+## ルートディレクトリからchootを実行
 
-chroot .
+choot .
 
 ```
-pacmanでアップデートする。なおchrootとは言えKali上で動いている為ホスト名はKaliである。</br>
+pacmanでアップデートする。なおchootとは言えKali上で動いている為ホスト名はKaliである。
 ```
 ## pacman実行
 
@@ -60,9 +60,9 @@ pacmanでアップデートする。なおchrootとは言えKali上で動いて�
 
 [ Kali ~]% mkinitcpio -P Linux
 
-## 一応update-grubも実行しておく
+## 一応update-gubも実行しておく
 
-[ Kali ~]% update-grub
+[ Kali ~]% update-gub
 
 ## exit
 
