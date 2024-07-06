@@ -50,7 +50,7 @@ mount --rbind /dev dev/
 chroot .
 
 ```
-pacmanでアップデートする。なおchootとは言えKali上で動いている為ホスト名はKaliである。
+pacmanでアップデートする。なおchrootとは言えKali上で動いている為ホスト名はKaliである。
 ```bash
 ## pacman実行
 
