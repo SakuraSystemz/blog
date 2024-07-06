@@ -35,7 +35,7 @@ tags: [Linux, 修理, ext4, fs]
 ```bash
 ## EFIパーティションをmanjaoのルートパーティションの/bootにマウント
 
-mount dev/sda1 /path/to/my/manjaro/boot/efi
+mount dev/sda1 /path/to/my/manjaro_root_dir/boot/efi
 
 cd path/to/my/manjaro_root_dir/
 
