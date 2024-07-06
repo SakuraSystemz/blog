@@ -60,9 +60,9 @@ pacmanでアップデートする。なおchrootとは言えKali上で動いて�
 
 [ Kali ~]% mkinitcpio -P Linux
 
-## 一応update-gurbも実行しておく
+## 一応update-grubも実行しておく
 
-[ Kali ~]% update-gurb
+[ Kali ~]% update-grub
 
 ## exit
 
