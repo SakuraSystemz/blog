@@ -42,7 +42,7 @@ cd path/to/my/manjaro_root_dir/
 ## ファイルシステムAPIをロード
 
 mount -t proc /proc proc/
-mount -t sysfs sys sys/
+mount -t sysfs /sys sys/
 mount --rbind /dev dev/
 
 ## ルートディレクトリからchrootを実行
