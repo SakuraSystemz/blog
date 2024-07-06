@@ -1,97 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-<title>Home | SakuraSystemz Blog</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="author" content="The/Rai01e">
-<meta name="generator" content="Jekyll v4.2.2">
-<link rel="canonical" href="http://localhost:4000/">
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>SakuraSystemz Blog</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="SakuraSystemz Blog" />
+<meta name="author" content="The/Rai01e" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="SakuraSystemz Blog" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SakuraSystemz Blog" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"The/Rai01e"},"headline":"SakuraSystemz Blog","name":"SakuraSystemz Blog","url":"http://localhost:4000/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="SakuraSystemz Blog" />
+</head>
+<body><header class="site-header">
 
-<link rel="stylesheet" href="/assets/css/frame.css">
+  <div class="wrapper"><a class="site-title" rel="author" href="/">SakuraSystemz Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
 
-<link rel="alternate" href="/feed.xml" type="application/atom+xml" title="SakuraSystemz Blog">
-
-
-
-
-
-
-
-<header>
-  <a href="/" class="title">SakuraSystemz Blog</a>
-  <nav><a href="/" class="selected">Home</a><a href="/about/" >About</a><a href="/tags/" >Tags Index</a></nav>
-
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/tags/">Tags</a></div>
+      </nav></div>
 </header>
-
-
-  
-  <article>
-    <header>
-  <h1><a href="/jeykll-ghp/">JekyllとGitHub pagesでブログを組む時にハマった事</a></h1><time datetime="2023-08-06T00:00:00+09:00">August 06, 2023</time>
-</header>
-
-    <h2 id="はじめに">はじめに</h2>
-<p>自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。<br /></p>
-
-<p>申し遅れました、実際の生活と密接な名義として<code class="language-plaintext highlighter-rouge">Rai01e(SakuraSystemz)</code>を名乗らせてもらってます。<br /></p>
-
-<p>記事の流れとしてRubyとJekyllのインストールとセットアップ方法は省きます。<br />
-ただテーマ毎に仕様が違うので、それを応用的に運用する為にも公式のドキュメントは読んで損は無いと思います。ベースは同じなので。<br />
-<a href="https://jekyllrb.com/docs/">https://jekyllrb.com/docs/</a></p>
-
-<h2 id="ハマった点1-jekyllテーマの依存関係">ハマった点(1) Jekyllテーマの依存関係</h2>
-
-<p>ローカルでテストする段階の話です。正確に書くと<code class="language-plaintext highlighter-rouge">更新の途絶えたテーマの依存gemが要求するRubyバージョン</code>で躓く事が多かったです。<br />
-自分の場合だと、見覚えのある<a href="https://jamstackthemes.dev/theme/dark-poole/">dark-poole</a>や<a href="https://jamstackthemes.dev/theme/jekyll-midnight/">Midnight</a>のビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い<code class="language-plaintext highlighter-rouge">minimal_mistakes</code>に決めました。<br /></p>
-
-<p>rbenvでバージョン管理を行えば解決しますが、2.x系は怖くて無理でした。<br /></p>
-
-<h2 id="ハマった点2-jekyllキャッシュに気をつけよ">ハマった点(2) Jekyllキャッシュに気をつけよ</h2>
-
-<p>基本的にGitHub pagesのコンテンツは全て全世界公開なので、ブログ用ローカルリポジトリの<code class="language-plaintext highlighter-rouge">.jekyll-cache</code>を削除してからコミットすることを推奨します。このディレクトリには該当リポジトリへのフルパスが含まれているので、端末のユーザー名がGitHubのリポジトリ経由で外部に公開されてしまいます。<a href="https://en.wikipedia.org/wiki/Operations_security">OPSEC</a>の観点から削除しましょう。<br />
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2023-08-06/vo.2/img1.png" alt=".jekyll-cache" />
-<code class="language-plaintext highlighter-rouge">jekyll server --disable-disk-cache</code>また<code class="language-plaintext highlighter-rouge">jekyll build --disable-disk-cache</code>で永続的に無効化できます。<br /></p>
-
-<h2 id="ハマった点3-github-pagesとのタイムゾーンのズレ">ハマった点(3) GitHub pagesとのタイムゾーンのズレ</h2>
-
-<p>このブログを公開する際一番悩まされたのがGitHub pagesで公開した記事が反映されなかった事です。GitHub側のビルドと反映に時間がかかる事は前提知識としてありましたが、あまりにも遅かったのでBuildログを見ると<code class="language-plaintext highlighter-rouge">記事の読み込み自体がスキップされていました</code></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reading: _posts/2023-08-06-post.md
-Skipping: _posts/2023-08-06-post.md has a future date
-
-</code></pre></div></div>
-<p>とりあえずChatGPTでデバッグした所、GitHub側のビルドシステムのタイムゾーンがUTCであった為、日本時間よりUTCの方が進みが遅く2023年8月6日付けの記事が公開できない事がわかりました。そのタイムゾーンから考えて未来の記事は公開できないということですね。しかし、先程示した記事が8月6日付けなのは変えようがないので、<code class="language-plaintext highlighter-rouge">_config.yml</code>に<code class="language-plaintext highlighter-rouge">future: true</code>を埋め込む事で強引に解決させました。どうもGitHub側のタイムゾーンを<code class="language-plaintext highlighter-rouge">_config.yml</code>側からこれ以外迂回することはできないようです。<br /></p>
-
-<h2 id="終わりに">終わりに</h2>
-<p>親切感のないアバウトな記事ですが、自分が難儀した3つのポイントを掲載しておきました。Rubyを長らく触っていたのでこのブログを作るまでの作業時間はおそらく3時間ぐらいでした。殆どの時間をJekyllとGitHub pagesのビルドシステムの研究に割きました。<br /></p>
-
-<p>ともあれこの記事をご覧になった誰かの役に立てば幸いです。</p>
-
-    <div class="more"><a href="/jeykll-ghp/">read more</a></div>
-  </article>
-
-  <article>
-    <header>
-  <h1><a href="/1st-post/">ブログを開設しました</a></h1><time datetime="2023-08-06T00:00:00+09:00">August 06, 2023</time>
-</header>
-
-    <p>このブログでは日々の事や何か学んだことを書いていきます。<br />
-主に自分の興味分野や日々の記録やご報告等に終始すると思います。<br /></p>
-
-    <div class="more"><a href="/1st-post/">read more</a></div>
-  </article>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
 
 
 
+  <ul class="post-list"><li>
+        <span class="post-meta">Jul-04-2024</span>
+        <h3>
+          <a class="post-link" href="/2024/07/04/linux-filesystem-broken-and-fix.html">
+            壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)
+          </a>
+        </h3></li><li>
+        <span class="post-meta">Apr-13-2024</span>
+        <h3>
+          <a class="post-link" href="/2024/04/13/new-home-decision.html">
+            新居決定のご報告
+          </a>
+        </h3></li><li>
+        <span class="post-meta">Apr-05-2024</span>
+        <h3>
+          <a class="post-link" href="/2024/04/05/jupyterlab-on-termux.html">
+            TermuxでJupyterLabを動かす方法とその感想
+          </a>
+        </h3></li><li>
+        <span class="post-meta">Mar-01-2024</span>
+        <h3>
+          <a class="post-link" href="/2024/03/01/no-ssd-and-brush.html">
+            SSDとPC用ブラシなくした...
+          </a>
+        </h3></li><li>
+        <span class="post-meta">Jan-04-2024</span>
+        <h3>
+          <a class="post-link" href="/2024/01/04/hexagon-nut-got-stripped.html">
+            六角ナットのネジがなめた
+          </a>
+        </h3></li><li>
+        <span class="post-meta">Aug-06-2023</span>
+        <h3>
+          <a class="post-link" href="/2023/08/06/jeykll-ghp.html">
+            JekyllとGitHub pagesでブログを組む時にハマった事
+          </a>
+        </h3></li><li>
+        <span class="post-meta">Aug-06-2023</span>
+        <h3>
+          <a class="post-link" href="/2023/08/06/1st-post.html">
+            ブログを開設しました
+          </a>
+        </h3></li></ul>
 
+    </div>
 
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
 
-
-
-<footer>
-  <div>SakuraSystemz Blog</div>
-  <nav><a href="/RvK74@protonmail.com" ><svg aria-label="Mail" class="icon"><use xlink:href="/assets/fontawesome/icons.svg#envelope"></use></svg></a><a href="https://github.com/SakuraSystemz" ><svg aria-label="Github" class="icon"><use xlink:href="/assets/fontawesome/icons.svg#github"></use></svg></a><a href="/feed.xml" ><svg aria-label="Subscribe" class="icon"><use xlink:href="/assets/fontawesome/icons.svg#rss"></use></svg></a></nav>
-
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <ul class="contact-list">
+          <li class="p-name">The/Rai01e</li>
+          <li><a class="u-email" href="mailto:RvK74@protonmail.com">RvK74@protonmail.com</a></li>
+          
+            <li><a href="https://github.com/SakuraSystemz" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          
+          
+            <li><a href="https://x.com/sakura_systemz" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p></p>
+      </div>
+    </div>
+  </div>
 </footer>
-
+</body>
 
 </html>

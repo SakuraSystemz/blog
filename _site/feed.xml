@@ -1,6 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-12-15T16:37:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">SakuraSystemz Blog</title><author><name>The/Rai01e</name></author><entry><title type="html">ブログを開設しました</title><link href="http://localhost:4000/1st-post/" rel="alternate" type="text/html" title="ブログを開設しました" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/1st-post</id><content type="html" xml:base="http://localhost:4000/1st-post/"><![CDATA[<p>このブログでは日々の事や何か学んだことを書いていきます。<br />
-主に自分の興味分野や日々の記録やご報告等に終始すると思います。<br /></p>]]></content><author><name>The/Rai01e</name></author><summary type="html"><![CDATA[このブログでは日々の事や何か学んだことを書いていきます。 主に自分の興味分野や日々の記録やご報告等に終始すると思います。]]></summary></entry><entry><title type="html">JekyllとGitHub pagesでブログを組む時にハマった事</title><link href="http://localhost:4000/jeykll-ghp/" rel="alternate" type="text/html" title="JekyllとGitHub pagesでブログを組む時にハマった事" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/jeykll-ghp</id><content type="html" xml:base="http://localhost:4000/jeykll-ghp/"><![CDATA[<h2 id="はじめに">はじめに</h2>
-<p>自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。<br /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-07-06T09:06:02+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">SakuraSystemz Blog</title><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><entry><title type="html">壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)</title><link href="http://localhost:4000/2024/07/04/linux-filesystem-broken-and-fix.html" rel="alternate" type="text/html" title="壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)" /><published>2024-07-04T18:39:00+09:00</published><updated>2024-07-04T18:39:00+09:00</updated><id>http://localhost:4000/2024/07/04/linux-filesystem-broken-and-fix</id><content type="html" xml:base="http://localhost:4000/2024/07/04/linux-filesystem-broken-and-fix.html"><![CDATA[<p>カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。
+再度カーネルをアップデートしたはいいものの、次はファイルシステムが壊れていた。
+<code class="language-plaintext highlighter-rouge">FILESYSTEM CHECK FAILD</code>と出ていたので大方ファイルシステムであろうと思ったが的中していたようだ。</p>
+
+<p>今回は手元にあったKaliLinux LiveUSで修復したが、fsckさえ使えれば特別Kaliでなくても修復できる。
+同様にシステムを起動できない方の助けになれば幸い。</p>
+
+<h1 id="修復作業">修復作業</h1>
+<p>まず手元に起動可能なLiveUSかLiveDVDを用意する。試していないがUbuntuでもFedoraでもfsckが用意されていると思う。入っていない場合リポジトリを検索して欲しい(aptやdnfで)。
+次にLive起動してターミナルかシリアルコンソールを開いてootにログインする。これには作業をより簡便に行う意図がある。
+<code class="language-plaintext highlighter-rouge">lslk -f</code>を呼び出し起動できなくなったシステムのルートディレクトリが入っているパーティションを見つける。パーティション構成はそのコンピュータ毎に異なる為割愛する。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>┌──<span class="o">(</span>oot㉿kali<span class="o">)</span>-[/]
+└─# lslk <span class="nt">-f</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>先にファイルシステムがマウントされていないか確認する。マウントされている場合はアンマウント。
+ルートパーティションを以下のようにfsckに渡して修復する。私のファイルシステムはext4なので以下のように指定。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>┌──<span class="o">(</span>oot㉿kali<span class="o">)</span>-[/]
+└─# fsck.ext4 <span class="nt">-fyv</span> dev/sdX <span class="c">#Xは任意の数字、これも使用環境に依存する</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">-f</code>や<code class="language-plaintext highlighter-rouge">-v</code>はe2fsckに用意されている。fsckはext4を検出するか指定すると自動的にe2fsckに切り替えてくる。</p>
+
+<p>修復が完了した事を確認し再起動、電源が落ちたらUSやDVDを外しておく。</p>
+
+<h1 id="番外編-カーネルアップデートを再開する">番外編 カーネルアップデートを再開する</h1>
+<p>カーネルの修復方法も記載しておく(Ach系限定)
+<code class="language-plaintext highlighter-rouge">choot</code>を使いKaliから修復する。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="c">## EFIパーティションをmanjaoのルートパーティションの/bootにマウント</span>
+
+mount dev/sda1 /path/to/my/manjaro/boot/efi
+
+<span class="nb">cd </span>path/to/my/manjaro_root_dir/
+
+<span class="c">## ファイルシステムAPIをロード</span>
+
+mount <span class="nt">-t</span> poc /proc proc/
+mount <span class="nt">-t</span> sysfs sys sys/
+mount <span class="nt">--bind</span> /dev dev/
+
+<span class="c">## ルートディレクトリからchootを実行</span>
+
+choot <span class="nb">.</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>pacmanでアップデートする。なおchootとは言えKali上で動いている為ホスト名はKaliである。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="c">## pacman実行</span>
+
+<span class="o">[</span> Kali ~]% pacman <span class="nt">-Syyu</span>
+
+<span class="c">## mkinitcpio実行</span>
+
+<span class="o">[</span> Kali ~]% mkinitcpio <span class="nt">-P</span> Linux
+
+<span class="c">## 一応update-gubも実行しておく</span>
+
+<span class="o">[</span> Kali ~]% update-gub
+
+<span class="c">## exit</span>
+
+<span class="o">[</span> Kali ~]% <span class="nb">exit</span>
+</pre></td></tr></tbody></table></code></pre></div></div>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="Linux" /><category term="修理" /><category term="ext4" /><category term="fs" /><summary type="html"><![CDATA[カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。 再度カーネルをアップデートしたはいいものの、次はファイルシステムが壊れていた。 FILESYSTEM CHECK FAILDと出ていたので大方ファイルシステムであろうと思ったが的中していたようだ。]]></summary></entry><entry><title type="html">新居決定のご報告</title><link href="http://localhost:4000/2024/04/13/new-home-decision.html" rel="alternate" type="text/html" title="新居決定のご報告" /><published>2024-04-13T23:12:00+09:00</published><updated>2024-04-13T23:12:00+09:00</updated><id>http://localhost:4000/2024/04/13/new-home-decision</id><content type="html" xml:base="http://localhost:4000/2024/04/13/new-home-decision.html"><![CDATA[<p>やっと新居に入居できました。立地もよく、自然豊かで夏はホタルが飛んでいる心地のいい場所です。</p>
+
+<p>妻も気に入ってくれているようで本当に良かったです。
+ここでちょっとずつ療養してメンタルの調子が落ち着く事を願っています</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><summary type="html"><![CDATA[やっと新居に入居できました。立地もよく、自然豊かで夏はホタルが飛んでいる心地のいい場所です。]]></summary></entry><entry><title type="html">TermuxでJupyterLabを動かす方法とその感想</title><link href="http://localhost:4000/2024/04/05/jupyterlab-on-termux.html" rel="alternate" type="text/html" title="TermuxでJupyterLabを動かす方法とその感想" /><published>2024-04-05T18:46:00+09:00</published><updated>2024-04-05T18:46:00+09:00</updated><id>http://localhost:4000/2024/04/05/jupyterlab-on-termux</id><content type="html" xml:base="http://localhost:4000/2024/04/05/jupyterlab-on-termux.html"><![CDATA[<h2 id="jupyterlabとは">JupyterLabとは</h2>
+<p>JupyterLabはコンソールからサーバーを立ち上げ、Webブラウザからノートの執筆やPythonなどコードを逐次実行し都度確認できる実験および開発環境です。デモコードのデバックや言語仕様を探る時に重宝します。またコードはipynbファイルに保存されるので対話型環境における途中式を簡便に保存可能でいつでも編集・参照できます。</p>
+
+<h2 id="インストール">インストール</h2>
+<p>依存関係を一括インストールします。念の為build-essentialも追加します。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pkg <span class="nb">install </span>libzmq binutils build-essential python python-pip python-dev libzmq-dev libcrypt-dev libcrypt zlib pkg-config
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>ついでに<code class="language-plaintext highlighter-rouge">pkg upgrade</code>でパッケージをアップグレードしておきます。</p>
+
+<p>ここまでの作業で依存関係を整えたので後は</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pip <span class="nb">install </span>jupyterlab <span class="nt">-U</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>と叩けばインストール完了。</p>
+
+<p><strong>注意:スマホのシステム要件や通信環境によってインストールがタイムアウトする場合があります。タイムアウトを防ぐには以下の変数と共にコマンドを実行してください</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">PIP_DEFAULT_TIMEOUT</span><span class="o">=</span>1000 pip <span class="nb">install </span>jupyterlab
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="起動">起動</h2>
+<p>環境が構築できたので<code class="language-plaintext highlighter-rouge">jupyter lab</code>コマンドを実行し実体を立ち上げます。<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter.jpg" alt="" /></p>
+
+<p>JupyterLabは<code class="language-plaintext highlighter-rouge">jupyterlab /path/your/dir</code>というコマンドライン構文で任意のディレクトリを指定して立ち上げます。ディレクトリが指定されていない場合、JupyterLabはその直下をプロジェクトディレクトリとして扱います。</p>
+
+<p>私の場合noteディレクトリを指定しています。ノート作成できる他、Markdownプレビュー機能も付いいるので数式や化学式もきれいに表示されます。
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter-markdown-preview.jpg" alt="" /></p>
+
+<p>またWebブラウザからTerminalとしてTermuxにセッションにバインドする事ができます。個人的にこの機能が非常にありがたいです。Webページも併読できる為ssh接続で接続したサーバーのトラブルシューティングや、作業中にStackOverflowを見ながら修正できるので私としては一番使う機能です。これに関してはTerminalに限った話ではありませんが。
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter-terminal-kali.jpg" alt="" /></p>
+
+<h2 id="その他">その他</h2>
+<p>JupyterLabはカーネルという単位で多様なプログラミング言語をサポートしています。私はRustやっているので老舗のevcxr_jupyterカーネルをインストールしました。その手順についても記しておきます。</p>
+
+<h3 id="rustパッケージをインストール">rustパッケージをインストール</h3>
+<p>evcxr_replとevcxr_jupyterをインストールするにあたって、cargoとrustコンパイラを揃えます。以下を入力しインストールします。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pkg <span class="nb">install </span>rust
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>インストールが完了次第<code class="language-plaintext highlighter-rouge">cargo install evcxr_jupyter evcxr_repl</code>を続けて実行します。その後<code class="language-plaintext highlighter-rouge">evcxr_jupyter --install</code>でカーネルをインストール。これ初期設定は完了。JupyterLabの再起動後、Rustカーネルが反映されます。
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyter-rust.jpg" alt="" /></p>
+
+<p>あとは思い思いにコードを書くだけです。
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/rust-kernel-demo.jpg" alt="" /></p>
+
+<p>なおevcxrカーネルとはいえevcxr由来のコマンドを使うことができます。試しに<code class="language-plaintext highlighter-rouge">:help</code>と入力してみてください。
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyterlab-evcxr-command.jpg" alt="" /></p>
+<h2 id="最後に">最後に</h2>
+<p>JupyterLabは多様なカーネルをサポートしていますが、その全てがスマホ環境で動作するとは限りません。例えばGo言語の<a href="https://github.com/gopherdata/gophernotes">gophernotes</a>カーネルはTermuxではうまく動きませんし、<a href="https://github.com/janpfeifer/gonb">gonb</a>はAndroid環境をサポートしていません。またC言語カーネルとして有名な<a href="https://github.com/jupyter-xeus/xeus-cling">xeus-cling</a>はAnacondaが必須なのでTermuxではインストールできません(テストしていませんがProot環境なら動くかもしれません)。</p>
+
+<p>以上の通りすべての言語が動くとは限りませんが、ノートやREPLがブラウザで完結できるのは大変な利便かと思います。私自身勉強の面で大いに助かっています。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="termux" /><category term="android" /><category term="jupyterlab" /><category term="linux" /><summary type="html"><![CDATA[JupyterLabとは JupyterLabはコンソールからサーバーを立ち上げ、Webブラウザからノートの執筆やPythonなどコードを逐次実行し都度確認できる実験および開発環境です。デモコードのデバックや言語仕様を探る時に重宝します。またコードはipynbファイルに保存されるので対話型環境における途中式を簡便に保存可能でいつでも編集・参照できます。]]></summary></entry><entry><title type="html">SSDとPC用ブラシなくした…</title><link href="http://localhost:4000/2024/03/01/no-ssd-and-brush.html" rel="alternate" type="text/html" title="SSDとPC用ブラシなくした…" /><published>2024-03-01T00:00:00+09:00</published><updated>2024-03-01T00:00:00+09:00</updated><id>http://localhost:4000/2024/03/01/no-ssd-and-brush</id><content type="html" xml:base="http://localhost:4000/2024/03/01/no-ssd-and-brush.html"><![CDATA[<p>はい…気づいたらなくなってました…
+ブラシは安いのでホームセンターで買えると思いますが、1TBのSSDを失くしました…
+暗号化しているのでデータ流失の危惧は薄いものの、データ丸ごとどっか行きました….</p>
+
+<p>アクシデントばっか続いてますね…はい…</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><category term="薄い記事" /><summary type="html"><![CDATA[はい…気づいたらなくなってました… ブラシは安いのでホームセンターで買えると思いますが、1TBのSSDを失くしました… 暗号化しているのでデータ流失の危惧は薄いものの、データ丸ごとどっか行きました….]]></summary></entry><entry><title type="html">六角ナットのネジがなめた</title><link href="http://localhost:4000/2024/01/04/hexagon-nut-got-stripped.html" rel="alternate" type="text/html" title="六角ナットのネジがなめた" /><published>2024-01-04T00:00:00+09:00</published><updated>2024-01-04T00:00:00+09:00</updated><id>http://localhost:4000/2024/01/04/hexagon-nut-got-stripped</id><content type="html" xml:base="http://localhost:4000/2024/01/04/hexagon-nut-got-stripped.html"><![CDATA[<p>昨年購入したスチールラックの六角ナットがナメてしましました…。明日ホームセンターへ行きナットツイスターとソケットレンチを買いに行く予定です…。
+ナットの購入はその後を予定しています…。賃貸なのでできるだけ静かにしたいという気持ちと床に傷が入らないか心配です…。</p>
+
+<p>何やってんだよ….。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><category term="薄い記事" /><summary type="html"><![CDATA[昨年購入したスチールラックの六角ナットがナメてしましました…。明日ホームセンターへ行きナットツイスターとソケットレンチを買いに行く予定です…。 ナットの購入はその後を予定しています…。賃貸なのでできるだけ静かにしたいという気持ちと床に傷が入らないか心配です…。]]></summary></entry><entry><title type="html">ブログを開設しました</title><link href="http://localhost:4000/2023/08/06/1st-post.html" rel="alternate" type="text/html" title="ブログを開設しました" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/2023/08/06/1st-post</id><content type="html" xml:base="http://localhost:4000/2023/08/06/1st-post.html"><![CDATA[<p>このブログでは日々の事や何か学んだことを書いていきます。<br />
+主に自分の興味分野や日々の記録やご報告等に終始すると思います。<br /></p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><summary type="html"><![CDATA[このブログでは日々の事や何か学んだことを書いていきます。 主に自分の興味分野や日々の記録やご報告等に終始すると思います。]]></summary></entry><entry><title type="html">JekyllとGitHub pagesでブログを組む時にハマった事</title><link href="http://localhost:4000/2023/08/06/jeykll-ghp.html" rel="alternate" type="text/html" title="JekyllとGitHub pagesでブログを組む時にハマった事" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/2023/08/06/jeykll-ghp</id><content type="html" xml:base="http://localhost:4000/2023/08/06/jeykll-ghp.html"><![CDATA[<h2 id="はじめに">はじめに</h2>
+<p>自分は今まではてなブログを使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。<br /></p>
 
 <p>申し遅れました、実際の生活と密接な名義として<code class="language-plaintext highlighter-rouge">Rai01e(SakuraSystemz)</code>を名乗らせてもらってます。<br /></p>
 
@@ -11,7 +167,7 @@
 <h2 id="ハマった点1-jekyllテーマの依存関係">ハマった点(1) Jekyllテーマの依存関係</h2>
 
 <p>ローカルでテストする段階の話です。正確に書くと<code class="language-plaintext highlighter-rouge">更新の途絶えたテーマの依存gemが要求するRubyバージョン</code>で躓く事が多かったです。<br />
-自分の場合だと、見覚えのある<a href="https://jamstackthemes.dev/theme/dark-poole/">dark-poole</a>や<a href="https://jamstackthemes.dev/theme/jekyll-midnight/">Midnight</a>のビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い<code class="language-plaintext highlighter-rouge">minimal_mistakes</code>に決めました。<br /></p>
+自分の場合だと、見覚えのある<a href="https://jamstackthemes.dev/theme/dark-poole/">dark-poole</a>や<a href="https://jamstackthemes.dev/theme/jekyll-midnight/">Midnight</a>のビルド中Ruby 2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高い<code class="language-plaintext highlighter-rouge">minimal_mistakes</code>に決めました。<br /></p>
 
 <p>rbenvでバージョン管理を行えば解決しますが、2.x系は怖くて無理でした。<br /></p>
 
@@ -24,13 +180,16 @@
 <h2 id="ハマった点3-github-pagesとのタイムゾーンのズレ">ハマった点(3) GitHub pagesとのタイムゾーンのズレ</h2>
 
 <p>このブログを公開する際一番悩まされたのがGitHub pagesで公開した記事が反映されなかった事です。GitHub側のビルドと反映に時間がかかる事は前提知識としてありましたが、あまりにも遅かったのでBuildログを見ると<code class="language-plaintext highlighter-rouge">記事の読み込み自体がスキップされていました</code></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reading: _posts/2023-08-06-post.md
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>Reading: _posts/2023-08-06-post.md
 Skipping: _posts/2023-08-06-post.md has a future date
 
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 <p>とりあえずChatGPTでデバッグした所、GitHub側のビルドシステムのタイムゾーンがUTCであった為、日本時間よりUTCの方が進みが遅く2023年8月6日付けの記事が公開できない事がわかりました。そのタイムゾーンから考えて未来の記事は公開できないということですね。しかし、先程示した記事が8月6日付けなのは変えようがないので、<code class="language-plaintext highlighter-rouge">_config.yml</code>に<code class="language-plaintext highlighter-rouge">future: true</code>を埋め込む事で強引に解決させました。どうもGitHub側のタイムゾーンを<code class="language-plaintext highlighter-rouge">_config.yml</code>側からこれ以外迂回することはできないようです。<br /></p>
 
 <h2 id="終わりに">終わりに</h2>
 <p>親切感のないアバウトな記事ですが、自分が難儀した3つのポイントを掲載しておきました。Rubyを長らく触っていたのでこのブログを作るまでの作業時間はおそらく3時間ぐらいでした。殆どの時間をJekyllとGitHub pagesのビルドシステムの研究に割きました。<br /></p>
 
-<p>ともあれこの記事をご覧になった誰かの役に立てば幸いです。</p>]]></content><author><name>The/Rai01e</name></author><category term="備忘録" /><category term="薄い記事" /><summary type="html"><![CDATA[はじめに 自分は今まで はてなブログ を使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。 申し遅れました、実際の生活と密接な名義としてRai01e(SakuraSystemz)を名乗らせてもらってます。 記事の流れとしてRubyとJekyllのインストールとセットアップ方法は省きます。 ただテーマ毎に仕様が違うので、それを応用的に運用する為にも公式のドキュメントは読んで損は無いと思います。ベースは同じなので。 https://jekyllrb.com/docs/ ハマった点(1) Jekyllテーマの依存関係 ローカルでテストする段階の話です。正確に書くと更新の途絶えたテーマの依存gemが要求するRubyバージョンで躓く事が多かったです。 自分の場合だと、見覚えのあるdark-pooleやMidnightのビルド中Ruby v2.x系を要求された(自分のバージョンはv3.0.6)ので更新頻度の高いminimal_mistakesに決めました。 rbenvでバージョン管理を行えば解決しますが、2.x系は怖くて無理でした。 ハマった点(2) Jekyllキャッシュに気をつけよ 基本的にGitHub pagesのコンテンツは全て全世界公開なので、ブログ用ローカルリポジトリの.jekyll-cacheを削除してからコミットすることを推奨します。このディレクトリには該当リポジトリへのフルパスが含まれているので、端末のユーザー名がGitHubのリポジトリ経由で外部に公開されてしまいます。OPSECの観点から削除しましょう。 jekyll server --disable-disk-cacheまたjekyll build --disable-disk-cacheで永続的に無効化できます。 ハマった点(3) GitHub pagesとのタイムゾーンのズレ このブログを公開する際一番悩まされたのがGitHub pagesで公開した記事が反映されなかった事です。GitHub側のビルドと反映に時間がかかる事は前提知識としてありましたが、あまりにも遅かったのでBuildログを見ると記事の読み込み自体がスキップされていました Reading: _posts/2023-08-06-post.md Skipping: _posts/2023-08-06-post.md has a future date とりあえずChatGPTでデバッグした所、GitHub側のビルドシステムのタイムゾーンがUTCであった為、日本時間よりUTCの方が進みが遅く2023年8月6日付けの記事が公開できない事がわかりました。そのタイムゾーンから考えて未来の記事は公開できないということですね。しかし、先程示した記事が8月6日付けなのは変えようがないので、_config.ymlにfuture: trueを埋め込む事で強引に解決させました。どうもGitHub側のタイムゾーンを_config.yml側からこれ以外迂回することはできないようです。 終わりに 親切感のないアバウトな記事ですが、自分が難儀した3つのポイントを掲載しておきました。Rubyを長らく触っていたのでこのブログを作るまでの作業時間はおそらく3時間ぐらいでした。殆どの時間をJekyllとGitHub pagesのビルドシステムの研究に割きました。 ともあれこの記事をご覧になった誰かの役に立てば幸いです。]]></summary></entry></feed>
+<p>ともあれこの記事をご覧になった誰かの役に立てば幸いです。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="備忘録" /><category term="薄い記事" /><summary type="html"><![CDATA[はじめに 自分は今まではてなブログを使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。]]></summary></entry></feed>
