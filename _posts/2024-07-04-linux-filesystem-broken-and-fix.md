@@ -14,10 +14,10 @@ tags: [Linux, 修理, ext4, fs]
 # 修復作業
 まず手元に起動可能なLiveUSBかLiveDVDを用意する。試していないがUbuntuでもFedoraでもfsckが用意されていると思う。入っていない場合リポジトリを検索して欲しい(aptやdnfで)。
 次にLive起動してターミナルかシリアルコンソールを開いてrootにログインする。これには作業をより簡便に行う意図がある。
-`lslk -f`を呼び出し起動できなくなったシステムのルートディレクトリが入っているパーティションを見つける。パーティション構成はそのコンピュータ毎に異なる為割愛する。
+`lsblk -f`を呼び出し起動できなくなったシステムのルートディレクトリが入っているパーティションを見つける。パーティション構成はそのコンピュータ毎に異なる為割愛する。
 ```bash
 ┌──(root㉿kali)-[/]
-└─# lslk -f
+└─# lsblk -f
 ```
 先にファイルシステムがマウントされていないか確認する。マウントされている場合はアンマウント。
 ルートパーティションを以下のようにfsckに渡して修復する。私のファイルシステムはext4なので以下のように指定。
@@ -35,14 +35,14 @@ tags: [Linux, 修理, ext4, fs]
 ```bash
 ## EFIパーティションをmanjaoのルートパーティションの/bootにマウント
 
-mount dev/sda1 /path/to/my/manjaro/boot/efi
+mount dev/sda1 /path/to/my/manjaro_root_dir/boot/efi
 
 cd path/to/my/manjaro_root_dir/
 
 ## ファイルシステムAPIをロード
 
 mount -t proc /proc proc/
-mount -t sysfs sys sys/
+mount -t sysfs /sys sys/
 mount --rbind /dev dev/
 
 ## ルートディレクトリからchrootを実行
@@ -50,7 +50,7 @@ mount --rbind /dev dev/
 chroot .
 
 ```
-pacmanでアップデートする。なおchootとは言えKali上で動いている為ホスト名はKaliである。
+pacmanでアップデートする。なおchrootとは言えKali上で動いている為ホスト名はKaliである。
 ```bash
 ## pacman実行
 
@@ -60,9 +60,9 @@ pacmanでアップデートする。なおchootとは言えKali上で動いて�
 
 [ Kali ~]% mkinitcpio -P Linux
 
-## 一応update-gubも実行しておく
+## 一応update-grubも実行しておく
 
-[ Kali ~]% update-gub
+[ Kali ~]% update-grub
 
 ## exit
 
