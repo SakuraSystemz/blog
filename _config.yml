@@ -1,3 +1,4 @@
+future: true
 title: "SakuraSystemz Blog"
 baseurl: "/blog"
 title_separator: "-"
