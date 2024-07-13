@@ -1,4 +1,1 @@
-User-agent: *
-Disallow:
-
 Sitemap: https://sakurasystemz.github.io/blog/sitemap.xml
