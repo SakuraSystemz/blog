@@ -1,4 +1,5 @@
 title: "SakuraSystemz Blog"
+baseurl: "/blog"
 title_separator: "-"
 author:
   name: "The/Rai01e"
