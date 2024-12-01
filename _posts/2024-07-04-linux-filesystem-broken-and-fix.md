@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)"
+title: "アップデート中の事故による壊れたファイルシステムとカーネルの修復方法(FILESYSTEM CHECK FAILD)"
 date: 2024-07-04 18:39 +0900
 tags: [Linux, 修理, ext4, fs]
 ---
