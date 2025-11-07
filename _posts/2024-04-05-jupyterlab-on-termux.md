@@ -2,7 +2,7 @@
 layout: post
 title: TermuxでJupyterLabを動かす方法とその感想
 date: 2024-04-05 18:46 +0900
-tags: [termux, android, jupyterlab, linux, 技術記事]
+tags: [termux, android, jupyterlab, Linux, 技術記事]
 ---
 ## JupyterLabとは
 JupyterLabはコンソールからサーバーを立ち上げ、Webブラウザからノートの執筆やPythonなどコードを逐次実行し都度確認できる実験および開発環境です。デモコードのデバックや言語仕様を探る時に重宝します。またコードはipynbファイルに保存されるので対話型環境における途中式を簡便に保存可能でいつでも編集・参照できます。
