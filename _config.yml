@@ -9,7 +9,7 @@ author:
   twitter_username: "sakura_systemz"
 
 theme: minima
-
+banner: banner.png
 header_pages:
   - about.md
   - tags.md

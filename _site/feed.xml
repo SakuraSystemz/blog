@@ -1,33 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-07-06T09:06:02+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">SakuraSystemz Blog</title><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><entry><title type="html">壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)</title><link href="http://localhost:4000/2024/07/04/linux-filesystem-broken-and-fix.html" rel="alternate" type="text/html" title="壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)" /><published>2024-07-04T18:39:00+09:00</published><updated>2024-07-04T18:39:00+09:00</updated><id>http://localhost:4000/2024/07/04/linux-filesystem-broken-and-fix</id><content type="html" xml:base="http://localhost:4000/2024/07/04/linux-filesystem-broken-and-fix.html"><![CDATA[<p>カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2025-11-07T13:39:33+09:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">Raiole Blog</title><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><entry><title type="html">意外と大学数学に弱い</title><link href="http://localhost:4000/blog/2024/07/06/about-math-exam.html" rel="alternate" type="text/html" title="意外と大学数学に弱い" /><published>2024-07-06T22:00:00+09:00</published><updated>2024-07-06T22:00:00+09:00</updated><id>http://localhost:4000/blog/2024/07/06/about-math-exam</id><content type="html" xml:base="http://localhost:4000/blog/2024/07/06/about-math-exam.html"><![CDATA[<p>DESの模型を作成したり計算機科学が好きなのでよく意外だと言われます。
+元々私は暗算が苦手で筆算しないと計算できないという理由で算数が大の苦手です。数学は理屈なので理屈さえ覚えれば計算量も少ないのですが、関数分野や微分積分は計算(算数的)が多く非常に苦手です。</p>
+
+<p>大学のテストを今月の17日に控えているのでなんとかして微分積分と関数分野を覚えないといけないのですが…</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="雑記" /><category term="薄い記事" /><summary type="html"><![CDATA[DESの模型を作成したり計算機科学が好きなのでよく意外だと言われます。 元々私は暗算が苦手で筆算しないと計算できないという理由で算数が大の苦手です。数学は理屈なので理屈さえ覚えれば計算量も少ないのですが、関数分野や微分積分は計算(算数的)が多く非常に苦手です。 大学のテストを今月の17日に控えているのでなんとかして微分積分と関数分野を覚えないといけないのですが…]]></summary></entry><entry><title type="html">壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)</title><link href="http://localhost:4000/blog/2024/07/04/linux-filesystem-broken-and-fix.html" rel="alternate" type="text/html" title="壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)" /><published>2024-07-04T18:39:00+09:00</published><updated>2024-07-04T18:39:00+09:00</updated><id>http://localhost:4000/blog/2024/07/04/linux-filesystem-broken-and-fix</id><content type="html" xml:base="http://localhost:4000/blog/2024/07/04/linux-filesystem-broken-and-fix.html"><![CDATA[<p>カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。
 再度カーネルをアップデートしたはいいものの、次はファイルシステムが壊れていた。
 <code class="language-plaintext highlighter-rouge">FILESYSTEM CHECK FAILD</code>と出ていたので大方ファイルシステムであろうと思ったが的中していたようだ。</p>
 
-<p>今回は手元にあったKaliLinux LiveUSで修復したが、fsckさえ使えれば特別Kaliでなくても修復できる。
+<p>今回は手元にあったKaliLinux LiveUSBで修復したが、fsckさえ使えれば特別Kaliでなくても修復できる。
 同様にシステムを起動できない方の助けになれば幸い。</p>
 
 <h1 id="修復作業">修復作業</h1>
-<p>まず手元に起動可能なLiveUSかLiveDVDを用意する。試していないがUbuntuでもFedoraでもfsckが用意されていると思う。入っていない場合リポジトリを検索して欲しい(aptやdnfで)。
-次にLive起動してターミナルかシリアルコンソールを開いてootにログインする。これには作業をより簡便に行う意図がある。
-<code class="language-plaintext highlighter-rouge">lslk -f</code>を呼び出し起動できなくなったシステムのルートディレクトリが入っているパーティションを見つける。パーティション構成はそのコンピュータ毎に異なる為割愛する。</p>
+<p>まず手元に起動可能なLiveUSBかLiveDVDを用意する。試していないがUbuntuでもFedoraでもfsckが用意されていると思う。入っていない場合リポジトリを検索して欲しい(aptやdnfで)。
+次にLive起動してターミナルかシリアルコンソールを開いてrootにログインする。これには作業をより簡便に行う意図がある。
+<code class="language-plaintext highlighter-rouge">lsblk -f</code>を呼び出し起動できなくなったシステムのルートディレクトリが入っているパーティションを見つける。パーティション構成はそのコンピュータ毎に異なる為割愛する。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre>┌──<span class="o">(</span>oot㉿kali<span class="o">)</span>-[/]
-└─# lslk <span class="nt">-f</span>
+</pre></td><td class="rouge-code"><pre>┌──<span class="o">(</span>root㉿kali<span class="o">)</span>-[/]
+└─# lsblk <span class="nt">-f</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p>先にファイルシステムがマウントされていないか確認する。マウントされている場合はアンマウント。
 ルートパーティションを以下のようにfsckに渡して修復する。私のファイルシステムはext4なので以下のように指定。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre>┌──<span class="o">(</span>oot㉿kali<span class="o">)</span>-[/]
+</pre></td><td class="rouge-code"><pre>┌──<span class="o">(</span>root㉿kali<span class="o">)</span>-[/]
 └─# fsck.ext4 <span class="nt">-fyv</span> dev/sdX <span class="c">#Xは任意の数字、これも使用環境に依存する</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">-f</code>や<code class="language-plaintext highlighter-rouge">-v</code>はe2fsckに用意されている。fsckはext4を検出するか指定すると自動的にe2fsckに切り替えてくる。</p>
 
-<p>修復が完了した事を確認し再起動、電源が落ちたらUSやDVDを外しておく。</p>
+<p>修復が完了した事を確認し再起動、電源が落ちたらUSBやDVDを外しておく。</p>
 
 <h1 id="番外編-カーネルアップデートを再開する">番外編 カーネルアップデートを再開する</h1>
-<p>カーネルの修復方法も記載しておく(Ach系限定)
-<code class="language-plaintext highlighter-rouge">choot</code>を使いKaliから修復する。</p>
+<p>カーネルの修復方法も記載しておく(Arch系限定)
+<code class="language-plaintext highlighter-rouge">chroot</code>を使いKaliから修復する。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -46,22 +49,22 @@
 16
 </pre></td><td class="rouge-code"><pre><span class="c">## EFIパーティションをmanjaoのルートパーティションの/bootにマウント</span>
 
-mount dev/sda1 /path/to/my/manjaro/boot/efi
+mount dev/sda1 /path/to/my/manjaro_root_dir/boot/efi
 
 <span class="nb">cd </span>path/to/my/manjaro_root_dir/
 
 <span class="c">## ファイルシステムAPIをロード</span>
 
-mount <span class="nt">-t</span> poc /proc proc/
-mount <span class="nt">-t</span> sysfs sys sys/
-mount <span class="nt">--bind</span> /dev dev/
+mount <span class="nt">-t</span> proc /proc proc/
+mount <span class="nt">-t</span> sysfs /sys sys/
+mount <span class="nt">--rbind</span> /dev dev/
 
-<span class="c">## ルートディレクトリからchootを実行</span>
+<span class="c">## ルートディレクトリからchrootを実行</span>
 
-choot <span class="nb">.</span>
+<span class="nb">chroot</span> <span class="nb">.</span>
 
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>pacmanでアップデートする。なおchootとは言えKali上で動いている為ホスト名はKaliである。</p>
+<p>pacmanでアップデートする。なおchrootとは言えKali上で動いている為ホスト名はKaliである。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -85,17 +88,17 @@ choot <span class="nb">.</span>
 
 <span class="o">[</span> Kali ~]% mkinitcpio <span class="nt">-P</span> Linux
 
-<span class="c">## 一応update-gubも実行しておく</span>
+<span class="c">## 一応update-grubも実行しておく</span>
 
-<span class="o">[</span> Kali ~]% update-gub
+<span class="o">[</span> Kali ~]% update-grub
 
 <span class="c">## exit</span>
 
 <span class="o">[</span> Kali ~]% <span class="nb">exit</span>
-</pre></td></tr></tbody></table></code></pre></div></div>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="Linux" /><category term="修理" /><category term="ext4" /><category term="fs" /><summary type="html"><![CDATA[カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。 再度カーネルをアップデートしたはいいものの、次はファイルシステムが壊れていた。 FILESYSTEM CHECK FAILDと出ていたので大方ファイルシステムであろうと思ったが的中していたようだ。]]></summary></entry><entry><title type="html">新居決定のご報告</title><link href="http://localhost:4000/2024/04/13/new-home-decision.html" rel="alternate" type="text/html" title="新居決定のご報告" /><published>2024-04-13T23:12:00+09:00</published><updated>2024-04-13T23:12:00+09:00</updated><id>http://localhost:4000/2024/04/13/new-home-decision</id><content type="html" xml:base="http://localhost:4000/2024/04/13/new-home-decision.html"><![CDATA[<p>やっと新居に入居できました。立地もよく、自然豊かで夏はホタルが飛んでいる心地のいい場所です。</p>
+</pre></td></tr></tbody></table></code></pre></div></div>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="Linux" /><category term="修理" /><category term="ext4" /><category term="fs" /><category term="技術記事" /><category term="live_usb" /><summary type="html"><![CDATA[カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。 再度カーネルをアップデートしたはいいものの、次はファイルシステムが壊れていた。 FILESYSTEM CHECK FAILDと出ていたので大方ファイルシステムであろうと思ったが的中していたようだ。]]></summary></entry><entry><title type="html">新居決定のご報告</title><link href="http://localhost:4000/blog/2024/04/13/new-home-decision.html" rel="alternate" type="text/html" title="新居決定のご報告" /><published>2024-04-13T23:12:00+09:00</published><updated>2024-04-13T23:12:00+09:00</updated><id>http://localhost:4000/blog/2024/04/13/new-home-decision</id><content type="html" xml:base="http://localhost:4000/blog/2024/04/13/new-home-decision.html"><![CDATA[<p>やっと新居に入居できました。立地もよく、自然豊かで夏はホタルが飛んでいる心地のいい場所です。</p>
 
 <p>妻も気に入ってくれているようで本当に良かったです。
-ここでちょっとずつ療養してメンタルの調子が落ち着く事を願っています</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><summary type="html"><![CDATA[やっと新居に入居できました。立地もよく、自然豊かで夏はホタルが飛んでいる心地のいい場所です。]]></summary></entry><entry><title type="html">TermuxでJupyterLabを動かす方法とその感想</title><link href="http://localhost:4000/2024/04/05/jupyterlab-on-termux.html" rel="alternate" type="text/html" title="TermuxでJupyterLabを動かす方法とその感想" /><published>2024-04-05T18:46:00+09:00</published><updated>2024-04-05T18:46:00+09:00</updated><id>http://localhost:4000/2024/04/05/jupyterlab-on-termux</id><content type="html" xml:base="http://localhost:4000/2024/04/05/jupyterlab-on-termux.html"><![CDATA[<h2 id="jupyterlabとは">JupyterLabとは</h2>
+ここでちょっとずつ療養してメンタルの調子が落ち着く事を願っています</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><summary type="html"><![CDATA[やっと新居に入居できました。立地もよく、自然豊かで夏はホタルが飛んでいる心地のいい場所です。]]></summary></entry><entry><title type="html">TermuxでJupyterLabを動かす方法とその感想</title><link href="http://localhost:4000/blog/2024/04/05/jupyterlab-on-termux.html" rel="alternate" type="text/html" title="TermuxでJupyterLabを動かす方法とその感想" /><published>2024-04-05T18:46:00+09:00</published><updated>2024-04-05T18:46:00+09:00</updated><id>http://localhost:4000/blog/2024/04/05/jupyterlab-on-termux</id><content type="html" xml:base="http://localhost:4000/blog/2024/04/05/jupyterlab-on-termux.html"><![CDATA[<h2 id="jupyterlabとは">JupyterLabとは</h2>
 <p>JupyterLabはコンソールからサーバーを立ち上げ、Webブラウザからノートの執筆やPythonなどコードを逐次実行し都度確認できる実験および開発環境です。デモコードのデバックや言語仕様を探る時に重宝します。またコードはipynbファイルに保存されるので対話型環境における途中式を簡便に保存可能でいつでも編集・参照できます。</p>
 
 <h2 id="インストール">インストール</h2>
@@ -118,15 +121,19 @@ choot <span class="nb">.</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="起動">起動</h2>
-<p>環境が構築できたので<code class="language-plaintext highlighter-rouge">jupyter lab</code>コマンドを実行し実体を立ち上げます。<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter.jpg" alt="" /></p>
+<p>環境が構築できたので<code class="language-plaintext highlighter-rouge">jupyter lab</code>コマンドを実行し実体を立ち上げます。</p>
+
+<p><img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter.jpg" width="50%" /></p>
 
 <p>JupyterLabは<code class="language-plaintext highlighter-rouge">jupyterlab /path/your/dir</code>というコマンドライン構文で任意のディレクトリを指定して立ち上げます。ディレクトリが指定されていない場合、JupyterLabはその直下をプロジェクトディレクトリとして扱います。</p>
 
-<p>私の場合noteディレクトリを指定しています。ノート作成できる他、Markdownプレビュー機能も付いいるので数式や化学式もきれいに表示されます。
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter-markdown-preview.jpg" alt="" /></p>
+<p>私の場合noteディレクトリを指定しています。ノート作成できる他、Markdownプレビュー機能も付いいるので数式や化学式もきれいに表示されます。</p>
 
-<p>またWebブラウザからTerminalとしてTermuxにセッションにバインドする事ができます。個人的にこの機能が非常にありがたいです。Webページも併読できる為ssh接続で接続したサーバーのトラブルシューティングや、作業中にStackOverflowを見ながら修正できるので私としては一番使う機能です。これに関してはTerminalに限った話ではありませんが。
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter-terminal-kali.jpg" alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter-markdown-preview.jpg" width="50%" /></p>
+
+<p>またWebブラウザからTerminalとしてTermuxにセッションにバインドする事ができます。個人的にこの機能が非常にありがたいです。Webページも併読できる為ssh接続で接続したサーバーのトラブルシューティングや、作業中にStackOverflowを見ながら修正できるので私としては一番使う機能です。これに関してはTerminalに限った話ではありませんが。</p>
+
+<p><img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter-terminal-kali.jpg" width="50%" /></p>
 
 <h2 id="その他">その他</h2>
 <p>JupyterLabはカーネルという単位で多様なプログラミング言語をサポートしています。私はRustやっているので老舗のevcxr_jupyterカーネルをインストールしました。その手順についても記しておきます。</p>
@@ -136,26 +143,29 @@ choot <span class="nb">.</span>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>pkg <span class="nb">install </span>rust
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>インストールが完了次第<code class="language-plaintext highlighter-rouge">cargo install evcxr_jupyter evcxr_repl</code>を続けて実行します。その後<code class="language-plaintext highlighter-rouge">evcxr_jupyter --install</code>でカーネルをインストール。これ初期設定は完了。JupyterLabの再起動後、Rustカーネルが反映されます。
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyter-rust.jpg" alt="" /></p>
+<p>インストールが完了次第<code class="language-plaintext highlighter-rouge">cargo install evcxr_jupyter evcxr_repl</code>を続けて実行します。その後<code class="language-plaintext highlighter-rouge">evcxr_jupyter --install</code>でカーネルをインストール。これ初期設定は完了。JupyterLabの再起動後、Rustカーネルが反映されます。</p>
 
-<p>あとは思い思いにコードを書くだけです。
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/rust-kernel-demo.jpg" alt="" /></p>
+<p><img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyter-rust.jpg" width="50%" /></p>
 
-<p>なおevcxrカーネルとはいえevcxr由来のコマンドを使うことができます。試しに<code class="language-plaintext highlighter-rouge">:help</code>と入力してみてください。
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyterlab-evcxr-command.jpg" alt="" /></p>
+<p>あとは思い思いにコードを書くだけです。</p>
+
+<p><img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/rust-kernel-demo.jpg" width="50%" /></p>
+
+<p>なおevcxrカーネルとはいえevcxr由来のコマンドを使うことができます。試しに<code class="language-plaintext highlighter-rouge">:help</code>と入力してみてください。</p>
+
+<p><img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyterlab-evcxr-command.jpg" width="50%" /></p>
 <h2 id="最後に">最後に</h2>
 <p>JupyterLabは多様なカーネルをサポートしていますが、その全てがスマホ環境で動作するとは限りません。例えばGo言語の<a href="https://github.com/gopherdata/gophernotes">gophernotes</a>カーネルはTermuxではうまく動きませんし、<a href="https://github.com/janpfeifer/gonb">gonb</a>はAndroid環境をサポートしていません。またC言語カーネルとして有名な<a href="https://github.com/jupyter-xeus/xeus-cling">xeus-cling</a>はAnacondaが必須なのでTermuxではインストールできません(テストしていませんがProot環境なら動くかもしれません)。</p>
 
-<p>以上の通りすべての言語が動くとは限りませんが、ノートやREPLがブラウザで完結できるのは大変な利便かと思います。私自身勉強の面で大いに助かっています。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="termux" /><category term="android" /><category term="jupyterlab" /><category term="linux" /><summary type="html"><![CDATA[JupyterLabとは JupyterLabはコンソールからサーバーを立ち上げ、Webブラウザからノートの執筆やPythonなどコードを逐次実行し都度確認できる実験および開発環境です。デモコードのデバックや言語仕様を探る時に重宝します。またコードはipynbファイルに保存されるので対話型環境における途中式を簡便に保存可能でいつでも編集・参照できます。]]></summary></entry><entry><title type="html">SSDとPC用ブラシなくした…</title><link href="http://localhost:4000/2024/03/01/no-ssd-and-brush.html" rel="alternate" type="text/html" title="SSDとPC用ブラシなくした…" /><published>2024-03-01T00:00:00+09:00</published><updated>2024-03-01T00:00:00+09:00</updated><id>http://localhost:4000/2024/03/01/no-ssd-and-brush</id><content type="html" xml:base="http://localhost:4000/2024/03/01/no-ssd-and-brush.html"><![CDATA[<p>はい…気づいたらなくなってました…
+<p>以上の通りすべての言語が動くとは限りませんが、ノートやREPLがブラウザで完結できるのは大変な利便かと思います。私自身勉強の面で大いに助かっています。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="termux" /><category term="android" /><category term="jupyterlab" /><category term="Linux" /><category term="技術記事" /><summary type="html"><![CDATA[JupyterLabとは JupyterLabはコンソールからサーバーを立ち上げ、Webブラウザからノートの執筆やPythonなどコードを逐次実行し都度確認できる実験および開発環境です。デモコードのデバックや言語仕様を探る時に重宝します。またコードはipynbファイルに保存されるので対話型環境における途中式を簡便に保存可能でいつでも編集・参照できます。]]></summary></entry><entry><title type="html">SSDとPC用ブラシなくした…</title><link href="http://localhost:4000/blog/2024/03/01/no-ssd-and-brush.html" rel="alternate" type="text/html" title="SSDとPC用ブラシなくした…" /><published>2024-03-01T00:00:00+09:00</published><updated>2024-03-01T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/03/01/no-ssd-and-brush</id><content type="html" xml:base="http://localhost:4000/blog/2024/03/01/no-ssd-and-brush.html"><![CDATA[<p>はい…気づいたらなくなってました…
 ブラシは安いのでホームセンターで買えると思いますが、1TBのSSDを失くしました…
 暗号化しているのでデータ流失の危惧は薄いものの、データ丸ごとどっか行きました….</p>
 
-<p>アクシデントばっか続いてますね…はい…</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><category term="薄い記事" /><summary type="html"><![CDATA[はい…気づいたらなくなってました… ブラシは安いのでホームセンターで買えると思いますが、1TBのSSDを失くしました… 暗号化しているのでデータ流失の危惧は薄いものの、データ丸ごとどっか行きました….]]></summary></entry><entry><title type="html">六角ナットのネジがなめた</title><link href="http://localhost:4000/2024/01/04/hexagon-nut-got-stripped.html" rel="alternate" type="text/html" title="六角ナットのネジがなめた" /><published>2024-01-04T00:00:00+09:00</published><updated>2024-01-04T00:00:00+09:00</updated><id>http://localhost:4000/2024/01/04/hexagon-nut-got-stripped</id><content type="html" xml:base="http://localhost:4000/2024/01/04/hexagon-nut-got-stripped.html"><![CDATA[<p>昨年購入したスチールラックの六角ナットがナメてしましました…。明日ホームセンターへ行きナットツイスターとソケットレンチを買いに行く予定です…。
+<p>アクシデントばっか続いてますね…はい…</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><category term="薄い記事" /><summary type="html"><![CDATA[はい…気づいたらなくなってました… ブラシは安いのでホームセンターで買えると思いますが、1TBのSSDを失くしました… 暗号化しているのでデータ流失の危惧は薄いものの、データ丸ごとどっか行きました….]]></summary></entry><entry><title type="html">六角ナットのネジがなめた</title><link href="http://localhost:4000/blog/2024/01/04/hexagon-nut-got-stripped.html" rel="alternate" type="text/html" title="六角ナットのネジがなめた" /><published>2024-01-04T00:00:00+09:00</published><updated>2024-01-04T00:00:00+09:00</updated><id>http://localhost:4000/blog/2024/01/04/hexagon-nut-got-stripped</id><content type="html" xml:base="http://localhost:4000/blog/2024/01/04/hexagon-nut-got-stripped.html"><![CDATA[<p>昨年購入したスチールラックの六角ナットがナメてしましました…。明日ホームセンターへ行きナットツイスターとソケットレンチを買いに行く予定です…。
 ナットの購入はその後を予定しています…。賃貸なのでできるだけ静かにしたいという気持ちと床に傷が入らないか心配です…。</p>
 
-<p>何やってんだよ….。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><category term="薄い記事" /><summary type="html"><![CDATA[昨年購入したスチールラックの六角ナットがナメてしましました…。明日ホームセンターへ行きナットツイスターとソケットレンチを買いに行く予定です…。 ナットの購入はその後を予定しています…。賃貸なのでできるだけ静かにしたいという気持ちと床に傷が入らないか心配です…。]]></summary></entry><entry><title type="html">ブログを開設しました</title><link href="http://localhost:4000/2023/08/06/1st-post.html" rel="alternate" type="text/html" title="ブログを開設しました" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/2023/08/06/1st-post</id><content type="html" xml:base="http://localhost:4000/2023/08/06/1st-post.html"><![CDATA[<p>このブログでは日々の事や何か学んだことを書いていきます。<br />
-主に自分の興味分野や日々の記録やご報告等に終始すると思います。<br /></p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><summary type="html"><![CDATA[このブログでは日々の事や何か学んだことを書いていきます。 主に自分の興味分野や日々の記録やご報告等に終始すると思います。]]></summary></entry><entry><title type="html">JekyllとGitHub pagesでブログを組む時にハマった事</title><link href="http://localhost:4000/2023/08/06/jeykll-ghp.html" rel="alternate" type="text/html" title="JekyllとGitHub pagesでブログを組む時にハマった事" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/2023/08/06/jeykll-ghp</id><content type="html" xml:base="http://localhost:4000/2023/08/06/jeykll-ghp.html"><![CDATA[<h2 id="はじめに">はじめに</h2>
+<p>何やってんだよ….。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="日常" /><category term="薄い記事" /><summary type="html"><![CDATA[昨年購入したスチールラックの六角ナットがナメてしましました…。明日ホームセンターへ行きナットツイスターとソケットレンチを買いに行く予定です…。 ナットの購入はその後を予定しています…。賃貸なのでできるだけ静かにしたいという気持ちと床に傷が入らないか心配です…。]]></summary></entry><entry><title type="html">ブログを開設しました</title><link href="http://localhost:4000/blog/2023/08/06/1st-post.html" rel="alternate" type="text/html" title="ブログを開設しました" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/blog/2023/08/06/1st-post</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/06/1st-post.html"><![CDATA[<p>このブログでは日々の事や何か学んだことを書いていきます。<br />
+主に自分の興味分野や日々の記録やご報告等に終始すると思います。<br /></p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><summary type="html"><![CDATA[このブログでは日々の事や何か学んだことを書いていきます。 主に自分の興味分野や日々の記録やご報告等に終始すると思います。]]></summary></entry><entry><title type="html">JekyllとGitHub pagesでブログを組む時にハマった事</title><link href="http://localhost:4000/blog/2023/08/06/jeykll-ghp.html" rel="alternate" type="text/html" title="JekyllとGitHub pagesでブログを組む時にハマった事" /><published>2023-08-06T00:00:00+09:00</published><updated>2023-08-06T00:00:00+09:00</updated><id>http://localhost:4000/blog/2023/08/06/jeykll-ghp</id><content type="html" xml:base="http://localhost:4000/blog/2023/08/06/jeykll-ghp.html"><![CDATA[<h2 id="はじめに">はじめに</h2>
 <p>自分は今まではてなブログを使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。<br /></p>
 
 <p>申し遅れました、実際の生活と密接な名義として<code class="language-plaintext highlighter-rouge">Rai01e(SakuraSystemz)</code>を名乗らせてもらってます。<br /></p>
@@ -192,4 +202,4 @@ Skipping: _posts/2023-08-06-post.md has a future date
 <h2 id="終わりに">終わりに</h2>
 <p>親切感のないアバウトな記事ですが、自分が難儀した3つのポイントを掲載しておきました。Rubyを長らく触っていたのでこのブログを作るまでの作業時間はおそらく3時間ぐらいでした。殆どの時間をJekyllとGitHub pagesのビルドシステムの研究に割きました。<br /></p>
 
-<p>ともあれこの記事をご覧になった誰かの役に立てば幸いです。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="備忘録" /><category term="薄い記事" /><summary type="html"><![CDATA[はじめに 自分は今まではてなブログを使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。]]></summary></entry></feed>
+<p>ともあれこの記事をご覧になった誰かの役に立てば幸いです。</p>]]></content><author><name>The/Rai01e</name><email>RvK74@protonmail.com</email></author><category term="備忘録" /><category term="薄い記事" /><category term="技術記事" /><category term="Web" /><summary type="html"><![CDATA[はじめに 自分は今まではてなブログを使っていましたが、ProtonMailで登録できなかった事に加えトラッカーが多いのでgithub.ioドメインで立ち上げました。その際に難儀したポイント3点をここに書いておきます。]]></summary></entry></feed>
