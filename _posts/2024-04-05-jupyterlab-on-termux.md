@@ -33,7 +33,7 @@ PIP_DEFAULT_TIMEOUT=1000 pip install jupyterlab
 ## 起動
 環境が構築できたので`jupyter lab`コマンドを実行し実体を立ち上げます。
 
-<img src=">https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter.jpg" width="50%">
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/termux-jupyter.jpg" width="50%">
 
 JupyterLabは`jupyterlab /path/your/dir`というコマンドライン構文で任意のディレクトリを指定して立ち上げます。ディレクトリが指定されていない場合、JupyterLabはその直下をプロジェクトディレクトリとして扱います。
 
@@ -55,15 +55,15 @@ pkg install rust
 ```
 インストールが完了次第`cargo install evcxr_jupyter evcxr_repl`を続けて実行します。その後`evcxr_jupyter --install`でカーネルをインストール。これ初期設定は完了。JupyterLabの再起動後、Rustカーネルが反映されます。
 
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyter-rust.jpg" width="%50">
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyter-rust.jpg" width="50%">
 
 あとは思い思いにコードを書くだけです。
 
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/rust-kernel-demo.jpg" width="%50">
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/rust-kernel-demo.jpg" width="50%">
 
 なおevcxrカーネルとはいえevcxr由来のコマンドを使うことができます。試しに`:help`と入力してみてください。
 
-<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyterlab-evcxr-command.jpg" width="%50">
+<img src="https://raw.githubusercontent.com/SakuraSystemz/blog/main/IMG/2024-04-05/jupyterlab-evcxr-command.jpg" width="50%">
 ## 最後に
 JupyterLabは多様なカーネルをサポートしていますが、その全てがスマホ環境で動作するとは限りません。例えばGo言語の[gophernotes](https://github.com/gopherdata/gophernotes)カーネルはTermuxではうまく動きませんし、[gonb](https://github.com/janpfeifer/gonb)はAndroid環境をサポートしていません。またC言語カーネルとして有名な[xeus-cling](https://github.com/jupyter-xeus/xeus-cling)はAnacondaが必須なのでTermuxではインストールできません(テストしていませんがProot環境なら動くかもしれません)。
 
