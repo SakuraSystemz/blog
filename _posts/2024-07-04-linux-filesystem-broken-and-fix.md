@@ -2,7 +2,7 @@
 layout: post
 title: "壊れたファイルシステムの修復方法(FILESYSTEM CHECK FAILD)"
 date: 2024-07-04 18:39 +0900
-tags: [Linux, 修理, ext4, fs]
+tags: [Linux, 修理, ext4, fs, 技術記事, live_usb]
 ---
 カーネルアップデート中にThinkPadのバッテリーが切れてしまい、それが原因でシステムが起動できなくなったので修復した。
 再度カーネルをアップデートしたはいいものの、次はファイルシステムが壊れていた。
